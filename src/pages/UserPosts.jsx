@@ -5,7 +5,7 @@ import Card from '../components/card';
 
 const UserPosts = () => {
 	const [userposts, setUserposts] = useState([]);
-	const params = useParams()
+	const params = useParams();
 
 	useEffect(() => {
 		fetch(`https://jsonplaceholder.typicode.com/posts?userId=${params.userid}`)
@@ -13,7 +13,7 @@ const UserPosts = () => {
 			.then((result) => {
 				setUserposts(result);
 			});
-	}, []);
+	}, [params]);
 
 	return (
 		<div>
