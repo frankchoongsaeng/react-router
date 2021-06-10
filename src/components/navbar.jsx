@@ -6,18 +6,11 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from '../styles/navbar.module.css';
 
 const Navbar = () => {
-	const { state, setState } = useContext(AppContext);
+	const { state, dispatch } = useContext(AppContext);
 	const history = useHistory();
 
 	const logout = () => {
-		setState(prev => {
-			return {
-				...prev,
-				isLoggedIn: false,
-				userEmail: null,
-				userId: null,
-			};
-		});
+		dispatch({ type: 'LOGOUT' });
 		history.push('/home');
 	};
 

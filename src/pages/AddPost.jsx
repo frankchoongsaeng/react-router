@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router';
 import { AppContext } from '../components/stateprovider';
 
 export default function AddPost() {
 	const { register, handleSubmit } = useForm();
-	const { state, setState } = useContext(AppContext);
+	const { state, dispatch } = useContext(AppContext);
+	const history = useHistory();
 
 	const createPost = ({ title, body }) => {
 		const data = {
@@ -22,12 +24,8 @@ export default function AddPost() {
 		})
 			.then(res => res.json())
 			.then(result => {
-				setState(prev => {
-					return {
-						...prev,
-						posts: [result, ...prev.posts],
-					};
-				});
+				dispatch({ type: 'ADD_POST', payload: result });
+				history.push('/home');
 			});
 	};
 

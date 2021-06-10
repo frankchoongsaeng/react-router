@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../components/stateprovider';
 
 export default function Login() {
-	const { setState } = useContext(AppContext);
+	const { dispatch } = useContext(AppContext);
 	const { register, handleSubmit } = useForm();
 	const history = useHistory();
 
@@ -24,13 +24,12 @@ export default function Login() {
 		}
 
 		alert('login successfull');
-		setState(prevstate => {
-			return {
-				...prevstate,
-				isLoggedIn: true,
+		dispatch({
+			type: 'LOGIN',
+			payload: {
 				userId: userdata.userId,
 				userEmail: userdata.email,
-			};
+			},
 		});
 		history.push('/home');
 	};
