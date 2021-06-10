@@ -4,14 +4,11 @@ import { useForm } from 'react-hook-form';
 import '../styles/register.css';
 
 const Register = () => {
-	const {
-		register,
-		handleSubmit,
-	} = useForm();
+	const { register, handleSubmit } = useForm();
 
 	const history = useHistory();
 
-	const registerUser = ({ email, password, confirmPassword }) => {
+	function registerUser({ email, password, confirmPassword }) {
 		if (!email) {
 			return alert(`please provide an email`);
 		}
@@ -31,7 +28,7 @@ const Register = () => {
 		localStorage.setItem(email, newUser);
 		alert('user registered');
 		history.push('/home');
-	};
+	}
 
 	return (
 		<>
@@ -47,9 +44,6 @@ const Register = () => {
 							placeholder='james.bond@spectre.com'
 							{...register('email', { required: true })}
 						/>
-					</div>
-					<div>
-						<p>form state errors</p>
 					</div>
 					<div className='form-group'>
 						<label htmlFor='password'>Password</label>

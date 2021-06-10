@@ -1,14 +1,14 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { AppContext } from '../components/stateprovider';
 
 export default function Login() {
+	const { setState } = useContext(AppContext);
 	const { register, handleSubmit } = useForm();
 
 	const login = ({ email, password }) => {
 		// get the users data
 		const user = localStorage.getItem(email);
-
-		
 
 		if (!user) {
 			return alert('An account for this email was not found');
@@ -18,10 +18,16 @@ export default function Login() {
 		console.log(userdata);
 
 		if (password !== userdata.password) {
-			alert('email or password was incorrect');
+			return alert('email or password was incorrect');
 		}
 
 		alert('login successfull');
+		setState(prevstate => {
+			return {
+				...prevstate,
+				isLoggedIn: true,
+			};
+		});
 	};
 
 	return (

@@ -34,7 +34,49 @@ body {
 	box-shadow: 0px 13px 15px -10px #888;
 }
 
-
 a {
-  color: blue;
+	color: blue;
+}
+
+input,
+textarea,
+button {
+	font-size: inherit;
+	font-family: inherit;
+	padding: 10px 15px;
+	border: 1px solid #666;
+	border-radius: 0.2rem;
+}
+
+.form-container {
+	width: 400px;
+	margin: 30px auto;
+}
+
+.formgroup {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+form {
+	width: 100%;
+}
+
+form > * {
+	width: 100%;
+}
+
+button {
+	border: none;
+}
+
+.btn-primary {
+	background-color: rgb(59, 150, 59);
+	color: white;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background-color: rgb(39, 104, 39);
 }
