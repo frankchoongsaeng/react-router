@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
-export const AppContext = createContext({});
+export const AppContext = createContext();
 
 export default function StateProvider({ children }) {
 	const [appData, setAppData] = useState({

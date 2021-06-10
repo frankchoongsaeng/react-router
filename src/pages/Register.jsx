@@ -1,11 +1,13 @@
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
+import { AppContext } from '../components/stateprovider';
+// import styles
 import '../styles/register.css';
 
 const Register = () => {
 	const { register, handleSubmit } = useForm();
-
+	const { state, setState } = useContext(AppContext);
 	const history = useHistory();
 
 	function registerUser({ email, password, confirmPassword }) {
@@ -21,12 +23,23 @@ const Register = () => {
 			return alert('this user has already been registered');
 		}
 		// create new user object and save it to local storage
-		const newUser = JSON.stringify({
+		const newUser = {
 			email: email,
 			password: password,
-		});
-		localStorage.setItem(email, newUser);
+			userId: Date.now(),
+		};
+		// save the users data for accessing later
+		localStorage.setItem(email, JSON.stringify(newUser));
+
 		alert('user registered');
+		setState(prevValue => {
+			return {
+				...prevValue,
+				isLoggedIn: true,
+				userId: newUser.userId,
+				userEmail: newUser.email,
+			};
+		});
 		history.push('/home');
 	}
 

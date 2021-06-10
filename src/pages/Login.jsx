@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { AppContext } from '../components/stateprovider';
 
 export default function Login() {
 	const { setState } = useContext(AppContext);
 	const { register, handleSubmit } = useForm();
+	const history = useHistory();
 
 	const login = ({ email, password }) => {
 		// get the users data
@@ -26,8 +28,11 @@ export default function Login() {
 			return {
 				...prevstate,
 				isLoggedIn: true,
+				userId: userdata.userId,
+				userEmail: userdata.email,
 			};
 		});
+		history.push('/home');
 	};
 
 	return (
