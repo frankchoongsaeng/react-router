@@ -47,7 +47,12 @@ export default function StateProvider({ children }) {
 	useEffect(() => {
 		fetch('https://jsonplaceholder.typicode.com/posts')
 			.then(res => res.json())
-			.then(result => dispatch({ type: 'SET_POSTS', payload: result }));
+			.then(result => {
+				return dispatch({
+					type: 'SET_POSTS',
+					payload: result,
+				});
+			});
 	}, []);
 
 	return (
